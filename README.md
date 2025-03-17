@@ -1,3 +1,3 @@
 # TECII_project
 
-ola
+Trabalho prático para avaliação final da UC Tópicos em Engenharia Computacional. 
