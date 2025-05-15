@@ -1,11 +1,16 @@
 import ROOT
 import sys
+import os
 
 if len(sys.argv) < 2:
     print("Usage: python3 edep_hist_per_detector.py <path_to_root_file>")
     sys.exit(1)
 
 file_path = sys.argv[1]
+
+OUTPUT_DIR = '../output/edep_hist_per_detector'
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
 file = ROOT.TFile.Open(file_path)
 
 tree = file.Get("edep_Per_Event")
@@ -25,7 +30,7 @@ for i in detectors:
     ind_canvas.SetLogy()
     ind_canvas.Update()
     #c_ind.SaveAs(f"energy_deposition_detector_{det}.png")
-    ind_canvas.SaveAs(f"../output/edep_hist_per_detector/edep_per_detector{i}.png")
+    ind_canvas.SaveAs(f"{OUTPUT_DIR}/edep_per_detector{i}.png")
 
 
 all_hist = ROOT.TCanvas("all_hist", "all detectors - edep", 1000, 800)
@@ -45,6 +50,6 @@ legend.Draw()
 all_hist.SetGrid()
 all_hist.SetLogy() 
 all_hist.Update()
-all_hist.SaveAs("../output/edep_hist_per_detector/energy_deposition_all_detectors.png")
+all_hist.SaveAs(f"{OUTPUT_DIR}/energy_deposition_all_detectors.png")
 
 file.Close()
