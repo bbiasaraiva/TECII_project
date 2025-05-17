@@ -18,9 +18,11 @@ tree = file.Get("edep_Per_Event")
 colors = [ROOT.kRed, ROOT.kBlue, ROOT.kGreen+2, ROOT.kMagenta]
 detectors = [0, 1, 2, 3]
 
+nbins, xmin, xmax = 300, 0, 600000
+
 individual_hst = []
 for i in detectors:
-    hist = ROOT.TH1D(f"hist_energy_dep_{i}", f"energy deposition: detector {i};energy (keV);counts", 300, 0, 600000)
+    hist = ROOT.TH1D(f"hist_energy_dep_{i}", f"energy deposition: detector {i};energy (keV);counts", nbins, xmin, xmax)
     tree.Draw(f"detector{i}>>hist_energy_dep_{i}", f"detector{i}>0.0", "goff")
     individual_hst.append(hist)
     #save canvas 
