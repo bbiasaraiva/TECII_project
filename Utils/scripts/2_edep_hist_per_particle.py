@@ -20,7 +20,7 @@ particles = {
 }
 
 detectors = [0,1,2,3]
-det_colors = [ROOT.kBlack, ROOT.kRed, ROOT.kBlue, ROOT.kGreen+2]
+det_colors = [ROOT.kGreen+2, ROOT.kBlue, ROOT.kMagenta, ROOT.kBlack]
 
 nbins, xmin, xmax = 200, 0, 8000
 

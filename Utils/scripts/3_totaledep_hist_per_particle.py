@@ -19,7 +19,7 @@ particles = {
     "others": None
 }
 particle_name = list(particles.keys())
-colors = [ROOT.kRed, ROOT.kBlue, ROOT.kGreen+2]
+colors = [ROOT.kBlue, ROOT.kRed, ROOT.kGreen+2]
 
 detectors = [0,1,2,3]
 sum_detect  = " + ".join(f"EdepDet{d}_keV" for d in detectors) # sums the 4 detec

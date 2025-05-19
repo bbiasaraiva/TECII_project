@@ -17,7 +17,7 @@ particles = {
     "muons": [ 13, -13],
     "pions": [211, -211, 111]
 }
-colors = {"muons": ROOT.kRed, "pions": ROOT.kBlue}
+colors = {"muons": ROOT.kBlue, "pions": ROOT.kRed}
 
 nbins, xmin, xmax = 200, -10.0, 250.0
 

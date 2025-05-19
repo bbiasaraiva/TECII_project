@@ -15,7 +15,7 @@ file = ROOT.TFile.Open(file_path)
 
 tree = file.Get("edep_Per_Event")
 
-colors = [ROOT.kRed, ROOT.kBlue, ROOT.kGreen+2, ROOT.kMagenta]
+colors = [ROOT.kGreen+2, ROOT.kBlue, ROOT.kMagenta, ROOT.kBlack]
 detectors = [0, 1, 2, 3]
 
 nbins, xmin, xmax = 300, 0, 600000
@@ -28,6 +28,7 @@ for i in detectors:
     #save canvas 
     ind_canvas = ROOT.TCanvas(f"hist for detector {i}", f"Detector {i}", 800, 600)
     hist.SetLineColor(colors[i])
+    hist.SetLineWidth(2)
     hist.Draw("HIST")
     ind_canvas.SetLogy()
     ind_canvas.Update()
