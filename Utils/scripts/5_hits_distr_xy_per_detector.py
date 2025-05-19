@@ -13,7 +13,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 file= ROOT.TFile.Open(file_path)
 hits_tree = file.Get("Hits")
 
-detectors = [0,1,2,3]
+detectors = [0,1,2,3] 
 
 # we're gonna use ±20 cm
 nbins  = 200
