@@ -3,7 +3,7 @@ import sys
 import os
 
 if len(sys.argv) < 2:
-    print("Usage: python3 exercise4_vertex_z.py <AmberTarget_Run_*.root>")
+    print("Usage: python3 4_hadronic_vertex_z.py <AmberTarget_Run_*.root>")
     sys.exit(1)
 
 file_path  = sys.argv[1]

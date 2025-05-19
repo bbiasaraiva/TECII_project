@@ -3,11 +3,11 @@ import sys
 import os
 
 if len(sys.argv) < 2:
-    print("Usage: python3 exercise3_total_edep.py <AmberTarget_Run_*.root>")
+    print("Usage: python3 3_totaledep_hist_per_particle.py <AmberTarget_Run_*.root>")
     sys.exit(1)
 
 file_path  = sys.argv[1]
-OUTPUT_DIR = "../output/3_total_edep"
+OUTPUT_DIR = "../output/3_totaledep_hist_per_particle"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 file= ROOT.TFile.Open(file_path)

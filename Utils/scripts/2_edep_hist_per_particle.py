@@ -3,7 +3,7 @@ import sys
 import os
 
 if len(sys.argv) < 2:
-    print("Usage: python3 task2_stack.py <AmberTarget_Run_*.root>")
+    print("Usage: python3 2_edep_hist_per_particle.py <AmberTarget_Run_*.root>")
     sys.exit(1)
 
 file_path = sys.argv[1]

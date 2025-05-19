@@ -3,11 +3,11 @@ import sys
 import os
 
 if len(sys.argv) < 2:
-    print("Usage: python3 exercise8_momentum_z.py <AmberTarget_Run_*.root>")
+    print("Usage: python3 8_momentum_dist_z_per_particle.py <AmberTarget_Run_*.root>")
     sys.exit(1)
 
 file_path  = sys.argv[1]
-OUTPUT_DIR = "../output/8_momentum_z"
+OUTPUT_DIR = "../output/8_momentum_dist_z_per_particle"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 file = ROOT.TFile.Open(file_path)
