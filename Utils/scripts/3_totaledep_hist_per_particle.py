@@ -46,8 +46,9 @@ for x, name in enumerate(particle_name):
     trkData_tree.Draw(f"({sum_detect})>>{hist.GetName()}", sel, "goff")
 
     canva_ind = ROOT.TCanvas(f"c_{name}", name, 800, 600)
-    hist.Draw("HIST")
+    hist.Draw("hist")
     canva_ind.SetLogy()
+    canva_ind.SetGrid()
     canva_ind.Update()
     canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"totaledep_{name}.png"))
 
@@ -59,7 +60,7 @@ for j, hist in enumerate(individual_hst):
     stack.Add(hist)
 
 canva_stack = ROOT.TCanvas("c_stack_total", "Stacked Total Edep", 800, 600)
-stack.Draw("hist")
+stack.Draw("nostack hist")
 canva_stack.SetLogy()
 
 leg = ROOT.TLegend(0.6, 0.7, 0.9, 0.9)
@@ -68,6 +69,7 @@ for k, name in enumerate(particle_name):
 leg.Draw()
 
 canva_stack.Update()
+canva_stack.SetGrid()
 canva_stack.SaveAs(os.path.join(OUTPUT_DIR, "totaledep_stacked_per_particle.png"))
 
 file.Close()

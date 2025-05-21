@@ -31,6 +31,7 @@ for i in detectors:
     hist.SetLineWidth(2)
     hist.Draw("HIST")
     ind_canvas.SetLogy()
+    ind_canvas.SetGrid()
     ind_canvas.Update()
     #c_ind.SaveAs(f"energy_deposition_detector_{det}.png")
     ind_canvas.SaveAs(f"{OUTPUT_DIR}/edep_per_detector{i}.png")
@@ -48,8 +49,8 @@ for det, h in zip(detectors, individual_hst):
     legend.AddEntry(h, f"Detector {det}", "l")
 
 legend.Draw()
-all_hist.SetGrid()
 all_hist.SetLogy() 
+all_hist.SetGrid()
 all_hist.Update()
 all_hist.SaveAs(f"{OUTPUT_DIR}/energy_deposition_all_detectors.png")
 

@@ -17,13 +17,9 @@ isPrimary = {"primary": "IsPrimary==1", "secondary": "IsPrimary!=1"}
 category_names = list(isPrimary.keys())
 colors = [ROOT.kRed, ROOT.kBlue]
 
-nbins = 300
-zmin = vertex_tree.GetMinimum("vertexPosZ_cm")
-zmax = vertex_tree.GetMaximum("vertexPosZ_cm")
-
-#more focuesed -- analyse later
-# zmin =-300
-# zmax = -100
+nbins = 400
+zmin = -400
+zmax = 0
 
 individual_hst = []
 for x, name in enumerate(category_names):
@@ -40,6 +36,7 @@ for x, name in enumerate(category_names):
     canva_ind = ROOT.TCanvas(f"c_vertex_{name}", f"{name} vertices", 800, 600)
     hist.Draw("hist")
     canva_ind.SetLogy()
+    canva_ind.SetGrid()
     canva_ind.Update()
     canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"hadronic_vertex_z_{name}.png"))
 
@@ -52,12 +49,13 @@ for hist in individual_hst:
 stack.Draw("hist NOSTACK")
 stack.SetMinimum(0.1)
 
-legend = ROOT.TLegend(0.6, 0.7, 0.9, 0.9)
+legend = ROOT.TLegend(0.7, 0.8, 0.9, 0.9)
 for j, hist in enumerate(individual_hst):
     legend.AddEntry(hist, category_names[j], "l")
 
 legend.Draw()
 canva_all.SetLogy()
+canva_all.SetGrid()
 canva_all.Update()
 canva_all.SaveAs(os.path.join(OUTPUT_DIR, "hadronic_vertex_z_all.png"))
 

@@ -20,23 +20,29 @@ nbins  = 200
 xmin, xmax = -20.0, 20.0
 ymin, ymax = -20.0, 20.0
 
+h2_maps = {}
 for det in detectors:
     h2 = ROOT.TH2D(
-        f"h2_det{det}", f"detector {det}: hits in X vs Y;X (cm);Y (cm)",
+        f"h2_det{det}",f"detector {det}: hits in X vs Y;X (cm);Y (cm)",
         nbins, xmin, xmax,
         nbins, ymin, ymax)
-    
     hits_tree.Draw(
         f"hitPosY_cm:hitPosX_cm>>{h2.GetName()}",
         f"detectorID=={det}",
-        "goff")
-
+        "goff"
+    )
     h2.SetStats(False)
-    c = ROOT.TCanvas(f"c_det{det}", f"det {det} hits XY", 800, 600)
-    ROOT.gPad.SetRightMargin(0.15)
-    h2.Draw("COLZ")     # linear color map
+    h2_maps[det] = h2
 
-    c.Update()
-    c.SaveAs(os.path.join(OUTPUT_DIR, f"hits_xy_det{det}.png"))
+c_all = ROOT.TCanvas("c_hits_xy_all", "hits XY per detector", 1200, 1200)
+c_all.Divide(2, 2)
+
+for x, det in enumerate(detectors):
+    c_all.cd(x+1)
+    ROOT.gPad.SetRightMargin(0.15)
+    h2_maps[det].Draw("COLZ")
+
+c_all.Update()
+c_all.SaveAs(os.path.join(OUTPUT_DIR, "hits_xy_all_detectors.png"))
 
 file.Close()

@@ -55,7 +55,7 @@ for x, pdgs in particles.items():
         stack.Add(h)
 
     canva = ROOT.TCanvas(f"c_{x.lower()}", x, 800, 600)
-    stack.Draw("hist")
+    stack.Draw("nostack hist")
     canva.SetLogy()
 
     leg = ROOT.TLegend(0.6, 0.6, 0.9, 0.9)
@@ -63,6 +63,8 @@ for x, pdgs in particles.items():
         leg.AddEntry(h, f"detector {detectors[i]}", "l")
     leg.Draw()
 
+    canva.SetGridx()
+    canva.SetGridy()
     canva.Update()
     canva.SaveAs(os.path.join(OUTPUT_DIR, f"stack_{x.lower()}.png"))
 
@@ -92,7 +94,7 @@ for det in detectors:
         stack.Add(hist_part[name])
 
     c = ROOT.TCanvas(f"c_det{det}_by_particle", f"detector {det}: edep by particle", 800, 600)
-    stack.Draw("hist")
+    stack.Draw("nostack hist")
     c.SetLogy()
 
     leg = ROOT.TLegend(0.6, 0.6, 0.9, 0.9)
@@ -100,6 +102,7 @@ for det in detectors:
         leg.AddEntry(hist_part[name], name, "l")
     leg.Draw()
 
+    c.SetGrid()
     c.Update()
     c.SaveAs(os.path.join(OUTPUT_DIR, f"stack_detector{det}_particles.png"))
 
