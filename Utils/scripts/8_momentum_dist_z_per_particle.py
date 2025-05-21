@@ -19,7 +19,7 @@ particles = {
 }
 colors = {"muons": ROOT.kBlue, "pions": ROOT.kRed}
 
-nbins, xmin, xmax = 200, -10.0, 250.0
+nbins, xmin, xmax = 200, -10.0, 201
 
 individual_hst = {}
 for x, pdg in particles.items():
@@ -29,14 +29,15 @@ for x, pdg in particles.items():
     hist.SetLineColor(colors[x])
     hist.SetLineWidth(2)
 
-    pdg_cut = " || ".join(f"particlePDG=={p}" for p in pdg)
-    sel     = f"({pdg_cut})"
+    pdg_cut = " || ".join(f"particlePDG=={p}" for p in pdg) #NÃO ESTÁ A FUNCIONAR!!!!! 
+    sel = f"({pdg_cut} && pZ_GeV!=0)" #AAAAAAAAAAA QUERO DAR DROP DE TODAS AS ENTRADAS COM GeV<=0
 
     trkData_tree.Draw(f"pZ_GeV>>{hist.GetName()}", sel, "goff")
 
     canva_ind = ROOT.TCanvas(f"c_pZ_{x}", x, 800, 600)
     hist.Draw("HIST")
     canva_ind.SetLogy()
+    canva_ind.SetGrid()
     canva_ind.Update()
     canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"momentum_z_{x}.png"))
 
@@ -56,6 +57,7 @@ for name, hist in individual_hst.items():
 leg.Draw()
 
 c_all.SetLogy()
+c_all.SetGrid()
 c_all.Update()
 c_all.SaveAs(os.path.join(OUTPUT_DIR, "momentum_z_both.png"))
 

@@ -18,7 +18,7 @@ categories = {
     "primary":   "IsPrimary==1",
     "secondary": "IsPrimary!=1"}
 
-nbins, xmin, xmax = 200, -10.0, 250.0
+nbins, xmin, xmax = 200, -10.0, 201
 
 individual_hst = {}
 for isPrim, isPrim_cut in categories.items():
@@ -36,6 +36,7 @@ for isPrim, isPrim_cut in categories.items():
     canva_ind = ROOT.TCanvas(f"c_{isPrim}", isPrim, 800, 600)
     h.Draw("HIST")
     canva_ind.SetLogy()
+    canva_ind.SetGrid()
     canva_ind.Update()
     canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"momentum_z_{isPrim}_pions.png"))
 
@@ -55,6 +56,7 @@ leg.AddEntry(individual_hst["secondary"], "Secondary", "l")
 leg.Draw()
 
 c_both.SetLogy()
+c_both.SetGrid()
 c_both.Update()
 c_both.SaveAs(os.path.join(OUTPUT_DIR, "momentum_z_both_prim_sec_pions.png"))
 
