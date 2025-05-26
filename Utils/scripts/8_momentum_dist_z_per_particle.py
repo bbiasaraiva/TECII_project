@@ -7,6 +7,8 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 file_path  = sys.argv[1]
+file_num = sys.argv[2]
+
 OUTPUT_DIR = "../output/8_momentum_dist_z_per_particle"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -39,7 +41,8 @@ for x, pdg in particles.items():
     canva_ind.SetLogy()
     canva_ind.SetGrid()
     canva_ind.Update()
-    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"momentum_z_{x}.png"))
+    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"momentum_z_{x}_{file_num}.root"))
+    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"momentum_z_{x}_{file_num}.png"))
 
     individual_hst[x] = hist
 
@@ -59,6 +62,7 @@ leg.Draw()
 c_all.SetLogy()
 c_all.SetGrid()
 c_all.Update()
-c_all.SaveAs(os.path.join(OUTPUT_DIR, "momentum_z_both.png"))
+c_all.SaveAs(os.path.join(OUTPUT_DIR, f"momentum_z_both_{file_num}.png"))
+c_all.SaveAs(os.path.join(OUTPUT_DIR, f"momentum_z_both_{file_num}.root"))
 
 file.Close()

@@ -7,6 +7,8 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 file_path = sys.argv[1]
+file_num = sys.argv[2]
+
 OUTPUT_DIR = "../output/2_edep_hist"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -66,7 +68,8 @@ for x, pdgs in particles.items():
     canva.SetGridx()
     canva.SetGridy()
     canva.Update()
-    canva.SaveAs(os.path.join(OUTPUT_DIR, f"stack_{x.lower()}.png"))
+    canva.SaveAs(os.path.join(OUTPUT_DIR, f"stack_{x.lower()}_{file_num}.root"))
+    canva.SaveAs(os.path.join(OUTPUT_DIR, f"stack_{x.lower()}_{file_num}.png"))
 
 # stack per detector
 for det in detectors:
@@ -104,6 +107,6 @@ for det in detectors:
 
     c.SetGrid()
     c.Update()
-    c.SaveAs(os.path.join(OUTPUT_DIR, f"stack_detector{det}_particles.png"))
-
+    c.SaveAs(os.path.join(OUTPUT_DIR, f"stack_detector{det}_particles_{file_num}.root"))
+    c.SaveAs(os.path.join(OUTPUT_DIR, f"stack_detector{det}_particles_{file_num}.png"))
 file.Close()

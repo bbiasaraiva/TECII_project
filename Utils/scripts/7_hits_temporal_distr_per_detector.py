@@ -7,6 +7,8 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 file_path = sys.argv[1]
+file_num = sys.argv[2]
+
 OUTPUT_DIR = "../output/7_hits_temporal_distr_per_detector"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -39,7 +41,8 @@ for det, col in zip(detectors, colors):
     canva_ind.SetLogy()
     canva_ind.SetGrid()
     canva_ind.Update()
-    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"hits_time_det{det}.png"))
+    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"hits_time_det{det}_{file_num}.png"))
+    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"hits_time_det{det}_{file_num}.root"))
 
 stack = ROOT.THStack("stack_time", "hit time distribution per detector;time (ns);hits")
 for det, hist in h_time.items():
@@ -57,7 +60,8 @@ leg.Draw()
 
 c_stacked.SetGrid()
 c_stacked.Update()
-c_stacked.SaveAs(os.path.join(OUTPUT_DIR, "hits_time_stacked.png"))
+c_stacked.SaveAs(os.path.join(OUTPUT_DIR, f"hits_time_stacked_{file_num}.root"))
+c_stacked.SaveAs(os.path.join(OUTPUT_DIR, f"hits_time_stacked_{file_num}.png"))
 
 #zoom a part of the stacked hists
 nbins_zoom = 300
@@ -95,6 +99,7 @@ for det, hist in h_time_zoom.items():
 leg_alt.Draw()
 
 c_alt.Update()
-c_alt.SaveAs(os.path.join(OUTPUT_DIR, "hits_time_stacked_zoomed.png"))   
+c_alt.SaveAs(os.path.join(OUTPUT_DIR, f"hits_time_stacked_zoomed_{file_num}.png"))
+c_alt.SaveAs(os.path.join(OUTPUT_DIR, f"hits_time_stacked_zoomed_{file_num}.root"))   
 
 file.Close()

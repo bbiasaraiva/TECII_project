@@ -7,6 +7,8 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 file_path = sys.argv[1]
+file_num = sys.argv[2]
+
 OUTPUT_DIR = "../output/6_hits_distr_xy_per_particle"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -51,7 +53,8 @@ for x, det in enumerate(detectors):
     ROOT.gPad.SetRightMargin(0.15)
     h_charged[det].Draw("COLZ")
 c_charged.Update()
-c_charged.SaveAs(os.path.join(OUTPUT_DIR, "hits_xy_charged_allDetec.png"))
+c_charged.SaveAs(os.path.join(OUTPUT_DIR, f"hits_xy_charged_allDetec_{file_num}.root"))
+c_charged.SaveAs(os.path.join(OUTPUT_DIR, f"hits_xy_charged_allDetec_{file_num}.png"))
 
 #NEUTRAL hits
 c_neutral = ROOT.TCanvas("c_neutral", "neutral hits XY per detector", 1200, 1200)
@@ -61,6 +64,6 @@ for idx, det in enumerate(detectors):
     ROOT.gPad.SetRightMargin(0.15)
     h_neutral[det].Draw("COLZ")
 c_neutral.Update()
-c_neutral.SaveAs(os.path.join(OUTPUT_DIR, "hits_xy_neutral_allDetec.png"))
-
+c_neutral.SaveAs(os.path.join(OUTPUT_DIR, f"hits_xy_neutral_allDetec_{file_num}.root"))
+c_neutral.SaveAs(os.path.join(OUTPUT_DIR, f"hits_xy_neutral_allDetec_{file_num}.png"))
 file.Close()
