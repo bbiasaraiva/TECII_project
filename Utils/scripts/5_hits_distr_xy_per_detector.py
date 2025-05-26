@@ -7,6 +7,8 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 file_path  = sys.argv[1]
+file_num = sys.argv[2]
+
 OUTPUT_DIR = "../output/5_hits_distr_xy_per_detector"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -43,6 +45,6 @@ for x, det in enumerate(detectors):
     h2_maps[det].Draw("COLZ")
 
 c_all.Update()
-c_all.SaveAs(os.path.join(OUTPUT_DIR, "hits_xy_all_detectors.png"))
-
+c_all.SaveAs(os.path.join(OUTPUT_DIR, f"hits_xy_all_detectors_{file_num}.root"))
+c_all.SaveAs(os.path.join(OUTPUT_DIR, f"hits_xy_all_detectors_{file_num}.png"))
 file.Close()

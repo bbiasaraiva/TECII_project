@@ -6,7 +6,9 @@ if len(sys.argv) < 2:
     print("Usage: python3 3_totaledep_hist_per_particle.py <AmberTarget_Run_*.root>")
     sys.exit(1)
 
-file_path  = sys.argv[1]
+file_path = sys.argv[1]
+file_num = sys.argv[2]
+
 OUTPUT_DIR = "../output/3_totaledep_hist_per_particle"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -50,7 +52,8 @@ for x, name in enumerate(particle_name):
     canva_ind.SetLogy()
     canva_ind.SetGrid()
     canva_ind.Update()
-    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"totaledep_{name}.png"))
+    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"totaledep_{name}_{file_num}.png"))
+    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"totaledep_{name}_{file_num}.root"))
 
     individual_hst.append(hist)
 
@@ -70,6 +73,6 @@ leg.Draw()
 
 canva_stack.Update()
 canva_stack.SetGrid()
-canva_stack.SaveAs(os.path.join(OUTPUT_DIR, "totaledep_stacked_per_particle.png"))
-
+canva_stack.SaveAs(os.path.join(OUTPUT_DIR, f"totaledep_stacked_per_particle_{file_num}.root"))
+canva_stack.SaveAs(os.path.join(OUTPUT_DIR, f"totaledep_stacked_per_particle_{file_num}.png"))
 file.Close()

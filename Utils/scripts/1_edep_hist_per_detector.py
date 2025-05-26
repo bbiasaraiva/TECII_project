@@ -7,6 +7,9 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 file_path = sys.argv[1]
+file_num = sys.argv[2]
+
+
 
 OUTPUT_DIR = '../output/1_edep_hist_per_detector'
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -34,7 +37,9 @@ for i in detectors:
     ind_canvas.SetGrid()
     ind_canvas.Update()
     #c_ind.SaveAs(f"energy_deposition_detector_{det}.png")
-    ind_canvas.SaveAs(f"{OUTPUT_DIR}/edep_per_detector{i}.png")
+
+    ind_canvas.SaveAs(f"{OUTPUT_DIR}/edep_per_detector{i}_{file_num}.root")
+    ind_canvas.SaveAs(f"{OUTPUT_DIR}/edep_per_detector{i}_{file_num}.png")
 
 
 all_hist = ROOT.TCanvas("all_hist", "all detectors - edep", 1000, 800)
@@ -52,6 +57,6 @@ legend.Draw()
 all_hist.SetLogy() 
 all_hist.SetGrid()
 all_hist.Update()
-all_hist.SaveAs(f"{OUTPUT_DIR}/energy_deposition_all_detectors.png")
-
+all_hist.SaveAs(f"{OUTPUT_DIR}/energy_deposition_all_detectors_{file_num}.root")
+all_hist.SaveAs(f"{OUTPUT_DIR}/energy_deposition_all_detectors_{file_num}.png")
 file.Close()

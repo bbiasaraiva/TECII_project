@@ -7,6 +7,8 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 file_path  = sys.argv[1]
+file_num = sys.argv[2]
+
 OUTPUT_DIR = "../output/4_hadronic_vertex_z"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -38,8 +40,8 @@ for x, name in enumerate(category_names):
     canva_ind.SetLogy()
     canva_ind.SetGrid()
     canva_ind.Update()
-    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"hadronic_vertex_z_{name}.png"))
-
+    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"hadronic_vertex_z_{name}_{file_num}.root"))
+    canva_ind.SaveAs(os.path.join(OUTPUT_DIR, f"hadronic_vertex_z_{name}_{file_num}.png"))
 canva_all = ROOT.TCanvas("c_vertex_z", "hadronic vertex", 800, 600)
 
 stack = ROOT.THStack("h_vertex_stack", "hadronic vertices; Z (cm); entries")
@@ -57,6 +59,6 @@ legend.Draw()
 canva_all.SetLogy()
 canva_all.SetGrid()
 canva_all.Update()
-canva_all.SaveAs(os.path.join(OUTPUT_DIR, "hadronic_vertex_z_all.png"))
-
+canva_all.SaveAs(os.path.join(OUTPUT_DIR, f"hadronic_vertex_z_all_{file_num}.root"))
+canva_all.SaveAs(os.path.join(OUTPUT_DIR, f"hadronic_vertex_z_all_{file_num}.png"))
 file.Close()
